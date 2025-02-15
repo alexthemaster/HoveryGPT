@@ -125,6 +125,7 @@ function checkDisabled() {
       placeholder="Type a message..."
       v-on:keyup="checkDisabled"
       v-on:keyup.enter="sendMessage"
+      autofocus
       :disabled="inputDisabled"
     />
     <button :disabled="disabled" style="order: 2" @click="sendMessage">

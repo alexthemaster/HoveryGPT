@@ -6,6 +6,7 @@ const disabled = ref(true);
 const disabledDelete = ref(config.shortcut.length < 1);
 
 function setShortcut(e: KeyboardEvent) {
+  if (config.shortcut.includes(e.key == " " ? "Space" : e.key)) return;
   if (config.shortcut.length > 2) return;
   if (e.key == " ") return config.shortcut.push("Space");
   config.shortcut.push(e.key);
