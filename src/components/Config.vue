@@ -3,11 +3,22 @@ import { ref } from "vue";
 import { config, saveConfig } from "../store.js";
 
 const disabled = ref(true);
+const disabledDelete = ref(config.shortcut.length < 1);
 
 function setShortcut(e: KeyboardEvent) {
-  if (e.key == "Backspace") return (config.shortcut.length = 0);
   if (config.shortcut.length > 2) return;
+  if (e.key == " ") return config.shortcut.push("Space");
   config.shortcut.push(e.key);
+  checkShortcutDisabled();
+}
+
+function deleteShortcut() {
+  config.shortcut = [];
+  checkShortcutDisabled();
+}
+
+function checkShortcutDisabled() {
+  disabledDelete.value = config.shortcut.length < 1;
 }
 
 defineEmits(["close"]);
@@ -27,11 +38,10 @@ addEventListener("keyup", () => {
 
 <template>
   <template v-if="config.firstTime">
-    <h2>No config has been found, please set up Hovery GPT!</h2>
-    <h3>
-      Tip: you can always return to this page by using the context menu in your
-      tray
-    </h3>
+    <h2>
+      No config has been found, please set up Hovery GPT! (Tip: you can always
+      return to this page by using the context menu in your tray)
+    </h2>
   </template>
   <label for="base-url">Base URL:</label>
   <input
@@ -59,21 +69,27 @@ addEventListener("keyup", () => {
   />
 
   <label for="shortcut">Shortcut for opening Hovery GPT:</label>
-  <label style="font-size: 50%"
-    >Tip: Use Backspace to delete current shortcut</label
-  >
-  <input
-    id="shortcut"
-    v-on:keydown="setShortcut"
-    :value="config.shortcut.join('+')"
-    readonly
-  />
+  <div class="shortcut">
+    <input
+      id="shortcut"
+      v-on:keydown="setShortcut"
+      :value="config.shortcut.join('+')"
+      readonly
+      style="margin-bottom: 0"
+    />
+    <button @click="deleteShortcut" :disabled="disabledDelete">Delete</button>
+  </div>
 
   <button @click="saveConfig" :disabled="disabled">Save</button>
 </template>
 
 <style scoped>
 input {
+  margin-bottom: 10px;
+}
+
+.shortcut {
+  display: flex;
   margin-bottom: 10px;
 }
 </style>

@@ -127,7 +127,6 @@ async function afterReady() {
     show: config!.firstTime,
     titleBarStyle: "hidden",
     autoHideMenuBar: true,
-    alwaysOnTop: true,
   });
   win.setMenu(null);
   // win.webContents.openDevTools();
