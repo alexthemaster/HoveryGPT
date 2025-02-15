@@ -10,17 +10,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "highlightjs": "^9.16.2",
+    "highlight.js": "^11.11.1",
     "markdown-it": "^14.1.0",
-    "markdown-it-highlightjs": "^4.2.0",
     "openai": "^4.85.1",
-    "sanitize-html": "^2.14.0",
     "vue": "^3.4.21",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "@types/markdown-it": "^14.1.2",
-    "@types/sanitize-html": "^2.13.0",
     "@vitejs/plugin-vue": "^5.0.4",
     "electron": "^30.0.1",
     "electron-builder": "^24.13.3",
