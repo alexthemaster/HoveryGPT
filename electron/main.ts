@@ -215,6 +215,7 @@ ipcMain.handle("sendMessage", async (_, messages: string | GPTContent[]) => {
     .create({
       model: config?.model ?? "gpt-4o-mini",
       messages,
+      temperature: !!config?.temperature ? config.temperature : 1,
       stream: true,
     })
     .catch((err) => {
@@ -258,6 +259,7 @@ export interface Config {
   model: string;
   shortcut: string[];
   developerPrompt?: string;
+  temperature?: number;
 }
 
 export interface GPTContent {

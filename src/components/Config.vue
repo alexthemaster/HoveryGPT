@@ -31,6 +31,12 @@ function checkDisabled() {
     !config.shortcut.length;
 }
 
+function checkTemperature() {
+  if (!config.temperature) return;
+  if (config.temperature < 0) return (config.temperature = 0);
+  if (config.temperature > 2) return (config.temperature = 2);
+}
+
 defineEmits(["close"]);
 
 const urlRegex =
@@ -81,6 +87,14 @@ onMounted(checkDisabled);
     v-model.trim="config.developerPrompt"
     type="text"
     placeholder="Enter developer prompt (optional)"
+  />
+  <label for="temperature">Temperature:</label>
+  <input
+    id="temperature"
+    v-model.trim="config.temperature"
+    type="number"
+    placeholder="Enter temperature (optional - between 0 and 2)"
+    v-on:keyup="checkTemperature"
   />
 
   <label for="shortcut">Shortcut for opening Hovery GPT:</label>
