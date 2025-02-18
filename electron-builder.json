@@ -9,14 +9,14 @@
     "output": "release/${version}"
   },
   "files": ["dist", "dist-electron"],
+  "artifactName": "${productName}-${os}-${arch}-v${version}.${ext}",
   "mac": {
     "target": [
       {
         "target": "dmg",
         "arch": ["universal"]
       }
-    ],
-    "artifactName": "${productName}-Mac-${version}-Installer.${ext}"
+    ]
   },
   "win": {
     "target": [
@@ -24,8 +24,7 @@
         "target": "nsis",
         "arch": ["x64", "ia32", "arm64"]
       }
-    ],
-    "artifactName": "${productName}-Windows-${version}-Setup.${ext}"
+    ]
   },
   "nsis": {
     "oneClick": false,
@@ -39,7 +38,6 @@
         "target": "AppImage",
         "arch": ["x64", "arm64"]
       }
-    ],
-    "artifactName": "${productName}-Linux-${version}.${ext}"
+    ]
   }
 }
