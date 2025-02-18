@@ -8,10 +8,12 @@ import {
   nativeImage,
   Tray,
 } from "electron";
+import { autoUpdater } from "electron-updater";
 import { readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import OpenAI from "openai";
+autoUpdater.checkForUpdatesAndNotify();
 
 // const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -38,6 +40,8 @@ process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL
 
 let win: BrowserWindow | null;
 let tray: Tray | null;
+
+autoUpdater.checkForUpdatesAndNotify();
 
 const configPath = path.join(app.getPath("userData"), "settings.json");
 let config: Config | null;
