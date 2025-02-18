@@ -231,6 +231,10 @@ ipcMain.handle("sendMessage", async (_, messages: string | GPTContent[]) => {
   }
 });
 
+ipcMain.handle("hide", () => {
+  win?.hide();
+});
+
 function changeRoute(route: string) {
   win?.webContents.send("changeRoute", route);
 }

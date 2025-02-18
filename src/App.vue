@@ -5,6 +5,10 @@ const router = useRouter();
 window.ipcRenderer.on("changeRoute", (_, route) => {
   router.push(route);
 });
+
+addEventListener("keydown", (e) => {
+  if (e.key == "Escape") window.ipcRenderer.invoke("hide");
+});
 </script>
 
 <template>
