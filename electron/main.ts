@@ -82,7 +82,7 @@ function loadTray() {
       },
     },
     {
-      label: "Open Settings",
+      label: "Open Configuration",
       type: "normal",
       click: () => {
         changeRoute("/config");

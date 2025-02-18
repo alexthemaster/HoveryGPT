@@ -40,8 +40,8 @@ addEventListener("keyup", () => {
 <template>
   <template v-if="config.firstTime">
     <h2>
-      No config has been found, please set up Hovery GPT! (Tip: you can always
-      return to this page by using the context menu in your tray)
+      No configuration has been found, please set up Hovery GPT! (Tip: you can
+      always return to this page by using the context menu in your tray)
     </h2>
   </template>
   <label for="base-url">Base URL:</label>
