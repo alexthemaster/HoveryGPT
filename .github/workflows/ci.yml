@@ -22,6 +22,6 @@ jobs:
       - name: Install Dependencies
         run: npm ci
       - name: Build app
-        run: npm run build -- --publish always
+        run: npm run build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
