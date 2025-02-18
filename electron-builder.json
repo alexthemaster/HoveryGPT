@@ -37,7 +37,7 @@
     "target": [
       {
         "target": "AppImage",
-        "arch": ["x64", "ia32", "arm64"]
+        "arch": ["x64", "arm64"]
       }
     ],
     "artifactName": "${productName}-Linux-${version}.${ext}"
