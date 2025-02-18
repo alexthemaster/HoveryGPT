@@ -1,6 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
   "appId": "com.alexthemaster.hoverygpt",
+  "copyright": "Copyright © 2025 Alex Kovacs",
   "asar": true,
   "productName": "Hovery GPT",
   "icon": "public/icon.png",
@@ -9,14 +10,19 @@
   },
   "files": ["dist", "dist-electron"],
   "mac": {
-    "target": ["dmg"],
+    "target": [
+      {
+        "target": "dmg",
+        "arch": ["universal"]
+      }
+    ],
     "artifactName": "${productName}-Mac-${version}-Installer.${ext}"
   },
   "win": {
     "target": [
       {
         "target": "nsis",
-        "arch": ["x64"]
+        "arch": ["x64", "ia32", "arm64"]
       }
     ],
     "artifactName": "${productName}-Windows-${version}-Setup.${ext}"
@@ -28,7 +34,12 @@
     "deleteAppDataOnUninstall": false
   },
   "linux": {
-    "target": ["AppImage"],
+    "target": [
+      {
+        "target": "AppImage",
+        "arch": ["x64", "ia32", "arm64"]
+      }
+    ],
     "artifactName": "${productName}-Linux-${version}.${ext}"
   }
 }
