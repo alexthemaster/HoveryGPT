@@ -151,6 +151,7 @@ function checkDisabled() {
   text-overflow: ellipsis;
   text-wrap: wrap;
   font-size: 14px;
+  -webkit-app-region: no-drag;
 }
 
 pre:has(code) {
