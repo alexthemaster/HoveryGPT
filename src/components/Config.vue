@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { config, saveConfig } from "../store.js";
 
 const disabled = ref(true);
@@ -22,19 +22,25 @@ function checkShortcutDisabled() {
   disabledDelete.value = config.shortcut.length < 1;
 }
 
-defineEmits(["close"]);
-
-const urlRegex =
-  /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i;
-
-addEventListener("keyup", () => {
+function checkDisabled() {
   disabled.value =
     !config.baseUrl ||
     !urlRegex.test(config.baseUrl) ||
     !config.apiKey ||
     !config.model ||
     !config.shortcut.length;
+}
+
+defineEmits(["close"]);
+
+const urlRegex =
+  /[(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/i;
+
+addEventListener("keyup", () => {
+  checkDisabled();
 });
+
+onMounted(checkDisabled);
 </script>
 
 <template>
@@ -67,6 +73,14 @@ addEventListener("keyup", () => {
     type="text"
     required
     placeholder="Enter model name"
+  />
+
+  <label for="devPrompt">Developer prompt:</label>
+  <input
+    id="devPrompt"
+    v-model.trim="config.developerPrompt"
+    type="text"
+    placeholder="Enter developer prompt (optional)"
   />
 
   <label for="shortcut">Shortcut for opening Hovery GPT:</label>

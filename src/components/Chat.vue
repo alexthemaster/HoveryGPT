@@ -24,7 +24,9 @@ window.ipcRenderer.on("resetState", () => {
 window.ipcRenderer.on("messageStream", (_, msg) => {
   if (!msg) return;
   streamedMessage.value += msg;
-  scrollMessages();
+  nextTick(() => {
+    scrollMessages();
+  });
 });
 
 window.ipcRenderer.on("streamDone", (_, err) => {
@@ -101,7 +103,10 @@ function checkDisabled() {
 <template>
   <div class="messages" ref="msgDiv">
     <template v-for="message of messages">
-      <div :class="`message ${message.role}`">
+      <div
+        v-if="message.role !== 'developer'"
+        :class="`message ${message.role}`"
+      >
         <Markdown :md="message.content" />
       </div>
     </template>

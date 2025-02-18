@@ -206,6 +206,11 @@ ipcMain.handle("saveConfig", async (_, newConfigJSON) => {
 
 ipcMain.handle("sendMessage", async (_, messages: string | GPTContent[]) => {
   messages = JSON.parse(messages as string) as GPTContent[];
+
+  if (config?.developerPrompt) {
+    messages.push({ role: "developer", content: config.developerPrompt });
+  }
+
   const stream = await client?.chat.completions
     .create({
       model: config?.model ?? "gpt-4o-mini",
@@ -248,9 +253,10 @@ export interface Config {
   apiKey: string;
   model: string;
   shortcut: string[];
+  developerPrompt?: string;
 }
 
 export interface GPTContent {
-  role: "user" | "assistant";
+  role: "user" | "assistant" | "developer";
   content: string;
 }
