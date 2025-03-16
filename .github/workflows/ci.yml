@@ -22,6 +22,10 @@ jobs:
       - name: Install Dependencies
         run: npm ci
       - name: Build app
+        run: npm run build -- --publish never
+        if: github.event_name == 'pull_request'
+      - name: Build app and publish
         run: npm run build -- --publish always
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        if: github.event_name != 'pull_request'
